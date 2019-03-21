@@ -19,7 +19,9 @@ function Needles(){
 		this.pad = width/20;
 		this.plotWidth = (width-this.pad)/this.plotsAcross;
 		this.plotHeight = (height-this.pad)/this.plotsDown;
-		this.dialRadius = (this.plotWidth-this.pad)/2 - 5;
+		
+		// this needs to be improved!!!!
+		this.dialRadius = ((this.plotHeight/1.5) + (this.plotWidth/2) - this.pad)/2 - 5;
 	};
 	//call onResize to set initial values when the object is created
 	this.onResize();

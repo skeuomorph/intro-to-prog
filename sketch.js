@@ -9,7 +9,7 @@ var fourier;
 
 var capture;
 
-var track = ['assets/Rain.mp3','assets/VeryHigh.mp3','assets/Breaks.mp3'];
+var track = [['assets/VeryHigh.mp3','Shit and Shine','You Were Very High'],['assets/Rain.mp3','Solange','Sound of Rain'],['assets/BeThankful.mp3','William DeVaughn','Be Thankful for What You Got']];
 
 var trackNum = 0;
 
@@ -18,7 +18,7 @@ var spectrums = [];
 var volume = 1;
 
 function preload(){
-	sound = loadSound(track[trackNum]);
+	sound = loadSound(track[trackNum][0]);
 	sound.setVolume(volume);
 }
 
@@ -35,7 +35,7 @@ function setup(){
 	controls = new ControlsAndInput();
 
 	 //instantiate the fft object
-	fourier = new p5.FFT();
+	fourier = new p5.FFT(0.9);
 
 	 //create a new visualisation container and add visualisations
 	vis = new Visualisations();
@@ -53,18 +53,28 @@ function draw(){
 	vis.selectedVisual.draw();
 	//draw the controls on top.
 	controls.draw();
-	
+
+	if(spectrums.length >= 3){
+		for(var i = 0; i < spectrums.length; i += 5){
+			spectrums[i] += spectrums[i + 3];
+			spectrums[i + 1] += spectrums[i + 4];
+		}
+	}
 }
 
 function mouseClicked(){
-	controls.mousePressed(mouseX,mouseY,random(1,7));
-//	console.log(mouseX,mouseY);
+	controls.mousePressed(mouseX,mouseY,random(1,7),random(-2,2),random(-2,2));
+	console.log(spectrums);
 	
 	
 }
 
 function keyPressed(){
 	controls.keyPressed(keyCode);
+}
+
+function mouseMoved(){
+	
 }
 
 

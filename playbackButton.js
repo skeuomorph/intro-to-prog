@@ -2,19 +2,21 @@
 
 function PlaybackButton(){
 	
-	this.x = width / 2 - 20;
-	this.y = height - 50;
-	this.width = 40;
-	this.height = 40;
-	
-	this.fowardX = width / 2 + 40;
-	this.backX = width / 2 - 40;
+
 	
 	//flag to determine whether to play or pause after button click and
 	//to determine which icon to draw
 	this.playing = false;
 
 	this.draw = function(){
+		
+		this.x = width / 2 - 20;
+		this.y = height - 60;
+		this.width = 40;
+		this.height = 40;
+
+		this.fowardX = width / 2 + 40;
+		this.backX = width / 2 - 40;
 		
 		if(this.playing){
 			rect(this.x, this.y, this.width/2 - 2, this.height);
@@ -31,9 +33,11 @@ function PlaybackButton(){
 		triangle(this.backX, this.y, this.backX, this.y + this.height, this.backX - this.width, this.y + this.height/2);
 		triangle(this.backX - 20, this.y, this.backX - 20, this.y + this.height, this.backX - this.width - 20, this.y + this.height/2);
 		
+		textSize(20);
 		v = '';
 		v = parseInt(volume * 10);
-		text('volume ' + v + '\n' + track[trackNum], 20, height - 60);
+		text(track[trackNum][1] + '\n' + track[trackNum][2], 20, height - 50);
+		text('volume: ' + v, width - 120, 30);
 	};
 
 	//checks for clicks on the button, starts or pauses playabck.

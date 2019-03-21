@@ -1,67 +1,101 @@
-PLEASE RUN THE PROGRAM VIA A LOCAL SERVER HOST (Brackets being the easiest)
+## Case study 3: Audio visualiser
 
+In this case study you will be completing a simple music visualisation
+program that contains three separate visualisations.
 
-# intro-to-prog
-1st year Final Project
+To turn the sound into something that can be visualised p5.js provides
+a Fast Fourier Transform object. Take a look at its description in the
+[p5.sound documentation](https://p5js.org/reference/#/p5.FFT).
 
-    Markela Zeneli
-    
-    Taylor Millin-Reade
+For todays exercise you don’t need to be able to understand the full
+technicalities of this object or its methods. However, in putting
+this case study together we have used the following methods.
 
+- `FFT.analyze()` returns an array of 1024 values between 0 and 255. Each value represents the amplitude (loudness) of a small frequency range (pitch of the sound).
 
-# Starting point:
+- `FFT.waveform()` returns an array of 1024 values between -1
+  and 1. Each value represents the amplitude of the sound for a tiny
+  portion of time.
 
-The completed code for Case Study 2.
+- `FFT.energy(freq1, [freq2])` returns the volume of the sound at
+  frequency range specified by the `freq1` and `freq2` parameter. You
+  can specify `freq1` as a number or p5.js provides strings for common
+  values such as “bass” and “treble”, and leave `freq2` empty.
 
+### Tasks
 
-# Possible ideas/ build-ons:
+Download the music visualiser project template from the bottom of this
+page and look over the code.
 
-Fully integrated controls and interaction.
+#### Playback and fullscreen [2 marks]
 
-Altering spectrum.js to add another layer of visualisation, and allow both layers to move around each other through user input.
+In the `ControlsAndInput` constructor function (in the
+controlsAndInput.js file) complete `this.mousePressed()`.
 
-Within wavepattern.js, having multiple waves that react to different frequencies, as well as the original one which only responds to amplitude (through fourier.waveform() ).
+- Using the `playbackButton` object check if the mouse click is on the
+  play button (check out the `PlaybackButton` constructor function and
+  find the method which does this). When you have called this method
+  clicking the playback button should start the music and display a
+  visualisation.
+- If the click isn’t on the playback button toggle the display between
+  window and fullscreen (check out the p5.js documentation on how to
+  do this.)
 
-A webcam feed that changes colour/ shape respective to the changes in frequency.
+#### Visualisation menu [2 marks]
 
+In the `ControlsAndInput` constructor function complete
+`this.menu()`. Write a `for` loop that iterates over the array stored
+in the `visuals` property of the `Visualisations` object, which itself
+is stored in the global `vis` variable declared in sketch.js, writing
+each visualisation name to the screen. You can check if your menu is
+displayed correctly by pressing the space bar while the app is
+running. When complete it should look like the following:
 
-# Build-on no.1
+![menu](https://www.doc.gold.ac.uk/~jfort010/ip/case-studies/music-vis/figures/menu.png)
 
-Particles and a spiral spectrum added onto spectrum.js, under the functions spectrum1 and spectrum2 respectively. They are both centred at the middle of the screen.
+#### Spectrum analyser [4 marks]
 
-Using image() and loadPixels(), the image from the webcam feed is turned into an array of pixels. After applying            filter(THRESHOLD), each pixel with RGB value 255 is transformed into a pixel with less green and blue. The method of changing the values of green and blue is to access the properties of each pixel (i.e pixels[index + 1] to access the 'green' value), and to subtract that property by the value of the bass energy level at any given time. 
+Take a look at the `Spectrum()` constructor function. The fast Fourier
+transform analyse function (i.e. `p5.FFT.analyse()`) returns an array of
+amplitude values for 1024 audible frequency values. The amplitude
+value is between 0 and 255. The visualisation draws a rectangle for
+each of these frequencies, the height of the rectangle is determined
+by the amplitude value for that frequency.
 
+- Change the visualisation so that visualisation is horizontal not
+  vertical. Therefore, the bars emerge from the left hand side of the
+  screen not from the bottom, as in the following image. [2 marks]
 
-# Build-on no.2
+  ![menu](https://www.doc.gold.ac.uk/~jfort010/ip/case-studies/music-vis/figures/spec.png)
 
-The code for the following is in controlsAndInput.js.
+- Change the colour of each bar such that it gradually changes from
+  green to red based on the amplitude value [2 marks]. For example
+  - An amplitude value of 0 the colour values are R:0, G:255 and B:0.
+  - An amplitude value of 127 colour values are R:127, G:127 and B:0
+  - An amplitude value of 255 colour values are R:255, G:0 and B: 0
 
-The functions spectrum1 and spectrum2 are able to have their centres moved depending on where the mouse is clicked.
+- HINT: You will need to map the amplitude so that smaller values
+  are more green. The red channel doesn’t need to be mapped you can
+  use the raw amplitude value.
 
-Buttons added to skip tracks.
+#### Needle plots [2 marks]
 
-Fullscreen function added (hit "f" to activate).
+The `Needles` constructor function draws a visualisation that displays
+volume values for 4 frequency bands: bass, mid-low, mid-high and
+treble. When it is complete it looks like the image below:
 
+![menu](https://www.doc.gold.ac.uk/~jfort010/ip/case-studies/music-vis/figures/needles.png)
 
-# Build-on no.3
+All the trigonometry has been done for you :)
 
-Volume control with up/down arrow keys added.
+Within the needles.js file, complete the nested `for` loop in the
+`this.draw()` function.
 
-Volume display and current track on bottom left.
-
-Angles on needles.js changed from radians to degrees (to be consistent with the angleMode we chose previously for spectrum.js).
-
-    
-    ## N.B for peer review - areas for improvement
-   
-    - Fix blurry labels on the readers in needles.js
-    
-    - Amend video.js to turn red when the majority of frequencies are in the bass range, green when the majority are in the mid         range, and blue when the majority are in the treble range
-    
-    - Add more waves to wavepattern.js. The initial function gathers data through waveform(), which returns the current amplitude. Ideally, we would also like to represent bass frequencies, mid frequencies, and treble frequencies as waves. 
-    
-
-
-
-
-
+- Assign values to the `x`, `y`, `w` and `h` variables so the plot is
+  drawn at the right location and correct size.
+- On line 49 call the `this.ticks(centreX, bottomY, freqLabel)`
+  function correctly specifying the arguments. This will add the ticks
+  to the graph. The comments above the `ticks` function should help
+  you work out what each parameter does.
+- On line 54 call the `this.needle(energy, centreX, bottomY)`
+  function. Specifying the correct parameters.

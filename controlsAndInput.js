@@ -8,11 +8,11 @@ function ControlsAndInput(){
 	
 	this.playbackButton = new PlaybackButton();
 
-	this.mousePressed = function(x,y,size){
+	this.mousePressed = function(x,y,size,moveX,moveY){
 		if(!this.playbackButton.hitCheck() && vis.selectedVisual.name === "spectrum"){
-			spectrums.push(x,y,size);
-			if(spectrums.length > 6){
-				spectrums.splice(0,3);
+			spectrums.push(x,y,size,moveX,moveY);
+			if(spectrums.length > 10){
+				spectrums.splice(0,5);
 			}
 		}
 	};
@@ -43,7 +43,6 @@ function ControlsAndInput(){
 			fullscreen(!fs);
 		}
 		
-		// cant manipulate global variable volume ?????????
 		if(keycode == 38){
 			if(volume < 1){
 				volume += 0.1;
@@ -51,8 +50,9 @@ function ControlsAndInput(){
 				console.log(volume);	
 			}
 		}
+		// 1.3877787807814457e-16 ??????????
 		if(keycode == 40){
-			if(volume > -0){
+			if(volume > 0.1){
 				volume -= 0.1;
 				sound.setVolume(volume);
 				console.log(volume);	
@@ -98,7 +98,7 @@ function ControlsAndInput(){
 		//only draw the menu if menu displayed is set to true.
 		if(this.menuDisplayed){
 
-			text("Select a visualisation:", 100, 30);
+			text("Select a visualisation:", 10, 30);
 			this.menu();
 		}	
 		pop();
@@ -109,7 +109,7 @@ function ControlsAndInput(){
 		//draw out menu items for each visualisation
 		for(var i = 0; i < vis.visuals.length; i++){
 			var yLoc = 70 + i*40;
-			text((i+1) + ":  " +vis.visuals[i].name, 100, yLoc);
+			text((i+1) + ":  " +vis.visuals[i].name, 10, yLoc);
 		}
 	};
 }
