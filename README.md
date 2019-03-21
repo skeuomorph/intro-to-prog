@@ -49,7 +49,7 @@ Using image() and loadPixels(), the image from the webcam feed is turned into an
 
 The code for the following is in controlsAndInput.js.
 
-The functions spectrum1 and spectrum2 are able to have their centres moved depending on where the mouse is clicked.
+The functions spectrum1 and spectrum2 are able to have their centres moved depending on where the mouse is clicked. and move across the screen at a random speed
 
 Buttons added to skip tracks.
 
@@ -66,8 +66,6 @@ Angles on needles.js changed from radians to degrees (to be consistent with the 
 
     
     ## N.B for peer review - areas for improvement
-   
-    - Fix blurry labels on the readers in needles.js
     
     - Amend video.js to turn red when the majority of frequencies are in the bass range, green when the majority are in the mid         range, and blue when the majority are in the treble range
     
