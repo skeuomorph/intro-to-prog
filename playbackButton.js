@@ -2,8 +2,6 @@
 
 function PlaybackButton(){
 	
-
-	
 	//flag to determine whether to play or pause after button click and
 	//to determine which icon to draw
 	this.playing = false;
@@ -24,7 +22,6 @@ function PlaybackButton(){
 		}
 		else{	
 			triangle(this.x, this.y, this.x + this.width, this.y + this.height/2, this.x, this.y+this.height);
-
 		}
 		
 		triangle(this.fowardX, this.y, this.fowardX + this.width, 	this.y + this.height/2, this.fowardX, this.y + this.height);
@@ -38,6 +35,15 @@ function PlaybackButton(){
 		v = parseInt(volume * 10);
 		text(track[trackNum][1] + '\n' + track[trackNum][2], 20, height - 50);
 		text('volume: ' + v, width - 120, 30);
+		
+		if(recording){
+			fill(200,0,0);
+			ellipse(this.x + 160, this.y + 20, 40);
+		}
+		else{
+			fill(255);
+			ellipse(this.x + 160, this.y + 20, 40);
+		}
 	};
 
 	//checks for clicks on the button, starts or pauses playabck.
@@ -80,6 +86,20 @@ function PlaybackButton(){
 			this.playing = false;
 			sound = loadSound(track[trackNum]);
 			console.log(trackNum);
+			return true;
+		}
+		
+		if(mouseX > this.x + 140 && mouseX < this.x + 180 && mouseY > this.y && mouseY <this.y + 40){
+			if(!recording){
+				capturer.start();
+				recording = true;
+			}
+			
+			if(recording){
+				capturer.stop();
+				capturer.save();
+				recording = false;
+			}
 			return true;
 		}
 		

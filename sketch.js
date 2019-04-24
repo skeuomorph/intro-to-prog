@@ -19,12 +19,12 @@ var volume = 1;
 
 var img;
 
-var framerate = 30;
+var recording = false;
 
 // Ccapture
-var capturer = new CCapture({ format: 'webm'});
+var capturer = new CCapture({ format: 'webm', framerate: 15});
 // Ccapture
-var xseed, yseed, incrementxnoise,incrementynoise, canvas;
+var canvas;
 
 function preload(){
 	sound = loadSound(track[trackNum][0]);
@@ -44,6 +44,8 @@ function setup(){
 	img = createImage(windowWidth, windowHeight);
 	
 	angleMode(DEGREES);
+	
+	frameRate(15);
 	
 	controls = new ControlsAndInput();
 
@@ -98,4 +100,3 @@ function windowResized(){
 		vis.selectedVisual.onResize();
 	}
 }
-
