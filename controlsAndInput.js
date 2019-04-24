@@ -82,6 +82,16 @@ function ControlsAndInput(){
 			this.playbackButton.playing = false;
 			sound = loadSound(track[trackNum]);
 		}
+		
+		if(keycode == 82){
+			capturer.start();
+			var secondsElapsed = frameCount/framerate;
+			if (secondsElapsed >= 5) {
+  				capturer.stop();
+  				capturer.save();
+				}
+		   }
+//		   console.log(keycode);
 	};
 
 

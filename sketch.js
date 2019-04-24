@@ -7,9 +7,9 @@ var sound = null;
 //variable for p5 fast fourier transform
 var fourier;
 
-var capture;
+var vid;
 
-var track = [['assets/VeryHigh.mp3','Shit and Shine','You Were Very High'],['assets/Rain.mp3','Solange','Sound of Rain'],['assets/BeThankful.mp3','William DeVaughn','Be Thankful for What You Got']];
+var track = [['assets/VeryHigh.mp3','Shit and Shine','You Were Very High'],['assets/Rain.mp3','Solange','Sound of Rain'],['assets/BeThankful.mp3','William DeVaughn','Be Thankful for What You Got'],['assets/OnlyHuman.mp3','KH aka Four Tet','Only Human']];
 
 var trackNum = 0;
 
@@ -17,25 +17,38 @@ var spectrums = [];
 
 var volume = 1;
 
+var img;
+
+var framerate = 30;
+
+// Ccapture
+var capturer = new CCapture({ format: 'webm'});
+// Ccapture
+var xseed, yseed, incrementxnoise,incrementynoise, canvas;
+
 function preload(){
 	sound = loadSound(track[trackNum][0]);
 	sound.setVolume(volume);
 }
 
 function setup(){
+	// Ccapture
+	var p5canvas = createCanvas(windowWidth, windowHeight);
+	canvas = p5canvas.canvas;
 	
-	createCanvas(windowWidth, windowHeight);
 	pixelDensity(1);
 	
-	capture = createCapture(VIDEO);
-	capture.hide();
+	vid = createCapture(VIDEO);
+	vid.hide();
+	
+	img = createImage(windowWidth, windowHeight);
 	
 	angleMode(DEGREES);
 	
 	controls = new ControlsAndInput();
 
 	 //instantiate the fft object
-	fourier = new p5.FFT(0.9);
+	fourier = new p5.FFT(0.7);
 
 	 //create a new visualisation container and add visualisations
 	vis = new Visualisations();
@@ -60,6 +73,9 @@ function draw(){
 			spectrums[i + 1] += spectrums[i + 4];
 		}
 	}
+	// Ccapture
+	capturer.capture(canvas);
+
 }
 
 function mouseClicked(){
@@ -73,10 +89,6 @@ function keyPressed(){
 	controls.keyPressed(keyCode);
 }
 
-function mouseMoved(){
-	
-}
-
 
 //when the window has been resized. Resize canvas to fit 
 //if the visualisation needs to be resized call its onResize method
@@ -86,3 +98,4 @@ function windowResized(){
 		vis.selectedVisual.onResize();
 	}
 }
+
