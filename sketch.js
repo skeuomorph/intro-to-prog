@@ -26,6 +26,8 @@ var capturer = new CCapture({ format: 'webm', framerate: 15});
 // Ccapture
 var canvas;
 
+var angle = 0;
+
 function preload(){
 	sound = loadSound(track[trackNum][0]);
 	sound.setVolume(volume);
@@ -56,14 +58,16 @@ function setup(){
 	vis = new Visualisations();
 	vis.add(new Spectrum());
 	vis.add(new WavePattern());
-	vis.add(new Needles());
 	vis.add(new video());
+	vis.add(new Spin());
+	vis.add(new Needles());
 	
 
 }
 
 function draw(){
 	background(0);
+	angle++;
 	//draw the selected visualisation
 	vis.selectedVisual.draw();
 	//draw the controls on top.

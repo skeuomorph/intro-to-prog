@@ -23,13 +23,11 @@ function spectrum1(x,y,size){
 	
 	strokeWeight(4);
 
-	stroke(255);
-
 	beginShape(POINTS);
 
 	for(var i = 0; i < spectrum.length; i++){
 
-		var angle = map(i, 0, spectrum.length, 0, -360);
+		var angle = map(i, 0, spectrum.length, 0, - 360);
 		var amp = spectrum[i];
 		var r = amp * size;
 		var x1 = x + (r * cos(angle));
@@ -39,6 +37,8 @@ function spectrum1(x,y,size){
 
 		var a = x + (r * - cos(angle));
 		var b = y + (r * - sin(angle));
+		
+		stroke(255, 255, 255);
 
 		vertex(a,b);
 

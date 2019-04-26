@@ -85,11 +85,13 @@ function ControlsAndInput(){
 		// Ccapture
 		if(keycode == 82){
 			capturer.start();
+			recording = true;
 		   }
 		
 		if(keycode == 83){
 			capturer.stop();
   			capturer.save();
+			recording = false;
 		}
 		   console.log(keycode);
 	};

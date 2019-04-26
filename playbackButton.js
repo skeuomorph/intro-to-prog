@@ -39,6 +39,8 @@ function PlaybackButton(){
 		if(recording){
 			fill(200,0,0);
 			ellipse(this.x + 160, this.y + 20, 40);
+			fill(255);
+			rect(this.x + 200, this.y, 40, 40);
 		}
 		else{
 			fill(255);
@@ -89,20 +91,21 @@ function PlaybackButton(){
 			return true;
 		}
 		
-		if(mouseX > this.x + 140 && mouseX < this.x + 180 && mouseY > this.y && mouseY <this.y + 40){
-			if(!recording){
+		if(mouseX > this.x + 140 && mouseX < this.x + 180 && mouseY > this.y && mouseY < this.y + 40){
+			if(recording == false){
 				capturer.start();
 				recording = true;
 			}
-			
-			if(recording){
+			return true;
+		}
+		if(mouseX > this.x + 200 && mouseX < this.x + 240 && mouseY > this.y && mouseY < this.y + 40){
+			if(recording == true){
 				capturer.stop();
 				capturer.save();
 				recording = false;
 			}
 			return true;
-		}
-		
+		}	
 		return false;
 	};
 
