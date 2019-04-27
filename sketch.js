@@ -5,7 +5,7 @@ var vis = null;
 //variable for the p5 sound object
 var sound = null;
 //variable for p5 fast fourier transform
-var fourier;
+var fourier, fourier2;
 
 var vid;
 
@@ -53,16 +53,14 @@ function setup(){
 
 	 //instantiate the fft object
 	fourier = new p5.FFT(0.7);
+	fourier2 = new p5.FFT(0.2);
 
 	 //create a new visualisation container and add visualisations
 	vis = new Visualisations();
-	vis.add(new Spectrum());
-	vis.add(new WavePattern());
-	vis.add(new video());
 	vis.add(new Spin());
-	vis.add(new Needles());
-	
-
+	vis.add(new WavePattern());
+	vis.add(new Spectrum());
+	vis.add(new video());
 }
 
 function draw(){
@@ -73,7 +71,8 @@ function draw(){
 	//draw the controls on top.
 	controls.draw();
 
-	if(spectrums.length >= 3){
+//	moves spectrums
+	if(spectrums.length >= 5){
 		for(var i = 0; i < spectrums.length; i += 5){
 			spectrums[i] += spectrums[i + 3];
 			spectrums[i + 1] += spectrums[i + 4];

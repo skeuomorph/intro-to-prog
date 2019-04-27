@@ -11,7 +11,7 @@ function ControlsAndInput(){
 	this.mousePressed = function(x,y,size,moveX,moveY){
 		if(!this.playbackButton.hitCheck() && vis.selectedVisual.name === "spectrum"){
 			spectrums.push(x,y,size,moveX,moveY);
-			if(spectrums.length > 10){
+			if(spectrums.length > 15){
 				spectrums.splice(0,5);
 			}
 		}

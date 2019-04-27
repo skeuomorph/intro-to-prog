@@ -13,9 +13,10 @@ function video(){
 	this.draw = function(){
 		
 		var spectrum = fourier.analyze();
-		var volHigh = fourier.getEnergy("treble");
-		var volMid = fourier.getEnergy("mid");
-		var volLow = fourier.getEnergy("bass");
+		var spectrum2 = fourier2.analyze();
+		var volHigh = fourier2.getEnergy("treble");
+		var volMid = fourier2.getEnergy("mid");
+		var volLow = fourier2.getEnergy("bass");
 		
 		push();
 		
