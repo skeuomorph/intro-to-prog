@@ -20,16 +20,16 @@ function ControlsAndInput(){
 	//responds to keyboard presses
 	//@param keycode the ascii code of the keypressed
 	this.keyPressed = function(keycode){
-//		console.log(keycode);
+		//enter key to show/hide menu
 		if(keycode == 13){
 			this.menuDisplayed = !this.menuDisplayed;
 		}
-
+		//select track with numberz
 		if(keycode > 48 && keycode < 58){
 			var visNumber = keycode - 49;
 			vis.selectVisual(vis.visuals[visNumber].name); 
 		}
-		
+		//space to start/stop
 		if(keyCode == 32){
 			if (sound.isPlaying()) {
     			sound.pause();
@@ -38,11 +38,12 @@ function ControlsAndInput(){
   			}
   			this.playbackButton.playing = !this.playbackButton.playing;
 		}
+		//f for fullscreen
 		if(keycode == 70){
 			var fs = fullscreen();
 			fullscreen(!fs);
 		}
-		
+		//up arrow key to PUMP UP THE VOLUME
 		if(keycode == 38){
 			if(volume < 1){
 				volume += 0.1;
@@ -50,7 +51,8 @@ function ControlsAndInput(){
 				console.log(volume);	
 			}
 		}
-		// 1.3877787807814457e-16 ??????????
+		// 1.3877787807814457e-16 ?????????? is a very special number
+		//down arrow key to turn dat sh*te down
 		if(keycode == 40){
 			if(volume > 0.1){
 				volume -= 0.1;
@@ -58,7 +60,7 @@ function ControlsAndInput(){
 				console.log(volume);	
 			}
 		}
-		
+		//right arrow key to skip track
 		if(keycode == 39){
 			trackNum += 1;
 			if(trackNum > track.length - 1){
@@ -70,7 +72,7 @@ function ControlsAndInput(){
 			this.playbackButton.playing = false;
 			sound = loadSound(track[trackNum]);
 		}
-		
+		//left arrow key to back-track
 		if(keycode == 37){
 			trackNum -= 1;
 			if(trackNum < 0){
@@ -82,19 +84,19 @@ function ControlsAndInput(){
 			this.playbackButton.playing = false;
 			sound = loadSound(track[trackNum]);
 		}
-		// Ccapture
+		//hit "r" to start recording
 		if(keycode == 82){
 			capturer.start();
 			recording = true;
-		   }
-		
+		}
+		//hit "s" to stop recording
 		if(keycode == 83){
 			capturer.stop();
   			capturer.save();
 			recording = false;
 		}
 		   console.log(keycode);
-	};
+	}
 
 
 	//draws the playback button and potentially the menu

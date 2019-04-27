@@ -1,29 +1,36 @@
 //global for the controls and input 
 var controls = null;
+
 //store visualisations in a container
 var vis = null;
+
 //variable for the p5 sound object
 var sound = null;
+
 //variable for p5 fast fourier transform
 var fourier, fourier2;
 
 var vid;
 
+//an array to contain the tracks
 var track = [['assets/VeryHigh.mp3','Shit and Shine','You Were Very High'],['assets/Rain.mp3','Solange','Sound of Rain'],['assets/BeThankful.mp3','William DeVaughn','Be Thankful for What You Got'],['assets/OnlyHuman.mp3','KH aka Four Tet','Only Human']];
 
+//initialise track number
 var trackNum = 0;
 
 var spectrums = [];
 
+//initialise volume
 var volume = 1;
 
 var img;
 
+//set recording state to false initially
 var recording = false;
 
-// Ccapture
+//Ccapture object initialised
 var capturer = new CCapture({ format: 'webm', framerate: 15});
-// Ccapture
+
 var canvas;
 
 var angle = 0;
@@ -68,17 +75,18 @@ function draw(){
 	angle++;
 	//draw the selected visualisation
 	vis.selectedVisual.draw();
-	//draw the controls on top.
+	//draw the controls on top
 	controls.draw();
 
-//	moves spectrums
+//moves spectrums
 	if(spectrums.length >= 5){
 		for(var i = 0; i < spectrums.length; i += 5){
 			spectrums[i] += spectrums[i + 3];
 			spectrums[i + 1] += spectrums[i + 4];
 		}
 	}
-	// Ccapture
+	
+	//Ccapture
 	capturer.capture(canvas);
 
 }
