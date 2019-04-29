@@ -47,35 +47,6 @@ function video(){
 		image(img, 0, 0, windowWidth, windowHeight);
 		
 		
-				
-				
-///////////////////////////////////////////////////////////////			
-	
-//				var r = capture.pixels[index];
-//				var g = capture.pixels[index + 1];
-//				var b = capture.pixels[index + 2];
-				
-//				pixels[index] = r;
-//				pixels[index + 1] = g;
-//				pixels[index + 2] = b;
-				
-//				var BandW = (pixels[index] + pixels[index + 1] + pixels[index + 2]) / 3;
-//				
-//				if(BandW >= 127){
-//					pixels[index] = 255;
-//					pixels[index + 1] = 255;
-//					pixels[index + 2] = 255;
-//				}
-//				else{
-//					pixels[index] = 0;
-//					pixels[index + 1] = 0;
-//					pixels[index + 2] = 0;
-//				}
-//			}
-//		}
-//		
-//		updatePixels();
-		
 		pop();
 
 	};
