@@ -54,19 +54,18 @@ function PlaybackButton(){
 	this.hitCheck = function(){
 		
 		if(mouseX > this.x && mouseX < this.x + this.width && mouseY > this.y && mouseY < this.y + this.height){
-			//pause sound if mouse clicks on button while music is playing
+			//pause sound if mouse clicks on button while music is playing and vice versa
 			if (sound.isPlaying()) {
     			sound.pause();
   			} else {
     			sound.loop();
-			}
-			//set flag to the opposite of what it was before  
+  			}
+			//set flag to the opposite of what it was before 
   			this.playing = !this.playing;
   			return true;
 		}
-		
+		//if fast forward button is hit, go to next track
 		if(mouseX > this.fowardX && mouseX < this.fowardX + this.width + 20 && mouseY > this.y && mouseY < this.y + this.height){
-			//if fast forward button is hit, go to next track
 			trackNum += 1;
 			//if at the end of tracks, go back to first track
 			if(trackNum > track.length - 1){
@@ -80,9 +79,8 @@ function PlaybackButton(){
 			console.log(trackNum);
 			return true;
 		}
-		
+		//if back-track button is hit, go back a track
 		if(mouseX < this.backX && mouseX > this.backX - this.width - 20 && mouseY > this.y && mouseY < this.y + this.height){
-			//if back-track button is hit, go back a track
 			trackNum -= 1;
 			//if button is hit while at first track, go to last track
 			if(trackNum < 0){
@@ -96,18 +94,16 @@ function PlaybackButton(){
 			console.log(trackNum);
 			return true;
 		}
-		
+		//if record button is hit while not currently recording, start recording
 		if(mouseX > this.x + 140 && mouseX < this.x + 180 && mouseY > this.y && mouseY < this.y + 40){
-			//if record button is hit while not currently recording, start recording
 			if(recording == false){
 				capturer.start();
 				recording = true;
 			}
 			return true;
 		}
-
+		//if stop record button is hit while currently recording, stop recording
 		if(mouseX > this.x + 200 && mouseX < this.x + 240 && mouseY > this.y && mouseY < this.y + 40){
-			//if record button is hit while currently recording, stop recording
 			if(recording == true){
 				capturer.stop();
 				capturer.save();

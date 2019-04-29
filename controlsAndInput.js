@@ -51,7 +51,7 @@ function ControlsAndInput(){
 				console.log(volume);	
 			}
 		}
-		// 1.3877787807814457e-16 ?????????? is a very special number
+		// 1.3877787807814457e-16 ??????????
 		//down arrow key to turn dat sh*te down
 		if(keycode == 40){
 			if(volume > 0.1){
@@ -88,7 +88,7 @@ function ControlsAndInput(){
 		if(keycode == 82){
 			capturer.start();
 			recording = true;
-		}
+		   }
 		//hit "s" to stop recording
 		if(keycode == 83){
 			capturer.stop();
@@ -96,7 +96,7 @@ function ControlsAndInput(){
 			recording = false;
 		}
 		   console.log(keycode);
-	}
+	};
 
 
 	//draws the playback button and potentially the menu

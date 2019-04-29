@@ -1,15 +1,16 @@
 function Spin(){
+	//vis name
 	this.name = "Spin";
 	
 	this.draw = function(){
 		push();
 		translate(width/2, height/2);
 		rotate(angle)
-		spin1();
+		vis.selectedVisual.spin1();
 		pop();
 
 	}
-	function spin1(){
+	this.spin1 = function(){
 		
 		var spectrum2 = fourier2.analyze();
         var volHigh2 = fourier2.getEnergy("treble");
@@ -23,19 +24,15 @@ function Spin(){
 		var volLow = fourier.getEnergy("bass");
 		var wave = fourier.waveform();
 
-		stroke(volLow2,volMid2,255 - volLow2);
-		if(!controls.playbackButton.playing){
-			stroke(200,100,200);
-		}
-
+		stroke(volLow2,volMid2,255 - volLow2);//colour based on low and mid frequencies
+		
 		strokeWeight(5);
-
+		//draw several spiral shapes for various angles
 		beginShape(POINTS);
 
 		for(var i = 0; i < spectrum.length/2; i++){
 
-//			stroke(i / 4, i / 4, 255);
-			var angle = map(i, 0, spectrum.length/2, 0, -360);
+			var angle = map(i, 0, spectrum.length/2, 0, -360);//between -360 and 0 degrees
 
 			var amp = map(spectrum[i], 0, 255, 0 + i, 200);
 
@@ -47,8 +44,7 @@ function Spin(){
 
 		for(var i = 0; i < spectrum.length/2; i++){
 
-//			stroke(255);	
-			var angle = map(i, 0, spectrum.length/2, 90, -270);
+			var angle = map(i, 0, spectrum.length/2, 90, -270);//between -270 and 90 degrees
 
 			var amp = map(spectrum[i], 0, 255, 0 + i, 200);
 
@@ -64,8 +60,7 @@ function Spin(){
 
 		for(var i = 0; i < spectrum.length/2; i++){
 
-//			stroke(255, i / 4, i / 4);
-			var angle = map(i, 0, spectrum.length/2, 180, -180);
+			var angle = map(i, 0, spectrum.length/2, 180, -180);//between -180 and 180
 
 			var amp = map(spectrum[i], 0, 255, 0 + i, 200);
 
@@ -78,8 +73,7 @@ function Spin(){
 
 		for(var i = 0; i < spectrum.length/2; i++){
 
-//			stroke(i / 4, 255, i / 4);
-			var angle = map(i, 0, spectrum.length/2, 270, -90);
+			var angle = map(i, 0, spectrum.length/2, 270, -90);//between -180 and 180
 
 			var amp = map(spectrum[i], 0, 255, 0 + i, 200);
 
@@ -94,11 +88,7 @@ function Spin(){
 		
 		
 		strokeWeight(5);
-//		noStroke();
-		noFill()
-//		fill(volLow,volMid,255 - volLow)
-		
-		
+		noFill()	
 
 		beginShape();
 		
@@ -117,6 +107,7 @@ function Spin(){
 		endShape();
 		
 		if(volHigh2 > 25.5){
+			//draw shape when a sufficient amount of high frequencies is reached
 			beginShape();
 
 			for(var i = 0; i < wave.length; i++){

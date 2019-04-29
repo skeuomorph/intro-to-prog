@@ -1,12 +1,9 @@
 //global for the controls and input 
 var controls = null;
-
 //store visualisations in a container
 var vis = null;
-
 //variable for the p5 sound object
 var sound = null;
-
 //variable for p5 fast fourier transform
 var fourier, fourier2;
 
@@ -60,6 +57,7 @@ function setup(){
 
 	 //instantiate the fft object
 	fourier = new p5.FFT(0.7);
+	//new fft for difrent levele of smoothing 
 	fourier2 = new p5.FFT(0.2);
 
 	 //create a new visualisation container and add visualisations
@@ -75,18 +73,17 @@ function draw(){
 	angle++;
 	//draw the selected visualisation
 	vis.selectedVisual.draw();
-	//draw the controls on top
+	//draw the controls on top.
 	controls.draw();
 
-//moves spectrums
+//	moves spectrums
 	if(spectrums.length >= 5){
 		for(var i = 0; i < spectrums.length; i += 5){
 			spectrums[i] += spectrums[i + 3];
 			spectrums[i + 1] += spectrums[i + 4];
 		}
 	}
-	
-	//Ccapture
+	// Ccapture
 	capturer.capture(canvas);
 
 }
